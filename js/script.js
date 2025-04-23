@@ -1,4 +1,4 @@
-let mailArray = [];
+const mailArray = [];
 
 const getEmails = async () => {
   const requests = [];
@@ -11,11 +11,13 @@ const getEmails = async () => {
 
   try {
     const responses = await Promise.all(requests);
-    mailArray = responses.map((response) => response.data.response);
+    const mailArray = responses.map((response) => response.data.response);
 
-    // Stampare le email in una lista
-    mailArray.forEach((email, index) => {
-      console.log(`${index + 1}: ${email}`);
+    const list = document.getElementById("emailList");
+    mailArray.forEach((email) => {
+      const listItem = document.createElement("li");
+      listItem.textContent = email;
+      list.appendChild(listItem);
     });
   } catch (error) {
     console.error("Errore nel recupero delle email:", error);
